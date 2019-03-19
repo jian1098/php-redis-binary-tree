@@ -20,7 +20,7 @@ class MyRedis {
         }
     }
 
-    //插入hash    参数：区域id,用户id，属性数组
+    //添加节点
     public function addNode($id,$data){
         if(!is_array($data)){
             return [];
@@ -29,12 +29,12 @@ class MyRedis {
         return $resOrder;
     }
 
-    //查找指定区域指定用户id的属性
+    //查找节点
     public function getNode($id){
         return $this->redis->hGetAll($id);
     }
 
-    //修改指定区域指定用户id的属性   参数：区域id,用户id，属性名，属性值
+    //修改指定节点的属性
     public function setNode($id,$field,$value){
         return $this->redis->hSet($id,$field,$value);
     }
@@ -54,7 +54,7 @@ class MyRedis {
         return $this->redis->flushDB();
     }
 
-    //前序遍历的顺序取出二叉树 参数：区域，根节点
+    //前序遍历的顺序取出二叉树
     public function tree($root_id){
         $rootNode=$this->getNode($root_id);
         $this->tree[]=$root_id;
